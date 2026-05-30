@@ -85,32 +85,36 @@ body {
   
   /* Impeccable: Button variants */
   .btn-primary {
-    @apply bg-primary-600 text-white font-medium px-5 py-2.5 rounded-lg 
-           hover:bg-primary-700 active:bg-primary-800
-           transition-colors duration-200 ease-out-expo
-           focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+    @apply bg-primary-600 text-white font-medium px-5 py-2.5 rounded-lg;
+    @apply hover:bg-primary-700 active:bg-primary-800;
+    @apply transition-colors duration-200;
+    @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .btn-secondary {
-    @apply bg-neutral-100 text-neutral-700 font-medium px-5 py-2.5 rounded-lg 
-           hover:bg-neutral-200 active:bg-neutral-300
-           transition-colors duration-200 ease-out-expo
-           focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2;
+    @apply bg-neutral-100 text-neutral-700 font-medium px-5 py-2.5 rounded-lg;
+    @apply hover:bg-neutral-200 active:bg-neutral-300;
+    @apply transition-colors duration-200;
+    @apply focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .btn-ghost {
-    @apply text-neutral-600 font-medium px-5 py-2.5 rounded-lg 
-           hover:bg-neutral-100 hover:text-neutral-900
-           transition-colors duration-200 ease-out-expo;
+    @apply text-neutral-600 font-medium px-5 py-2.5 rounded-lg;
+    @apply hover:bg-neutral-100 hover:text-neutral-900;
+    @apply transition-colors duration-200;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   /* Impeccable: Form inputs */
   .input {
-    @apply w-full px-4 py-3 bg-surface border border-neutral-300 rounded-lg
-           text-neutral-900 placeholder:text-neutral-400
-           hover:border-neutral-400
-           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
-           transition-all duration-200 ease-out-expo;
+    @apply w-full px-4 py-3 bg-surface border border-neutral-300 rounded-lg;
+    @apply text-neutral-900 placeholder:text-neutral-400;
+    @apply hover:border-neutral-400;
+    @apply focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
+    @apply transition-all duration-200;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   /* Impeccable: Badge component */
