@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 98%;
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
     --card-foreground: 20 14.3% 4.1%;
@@ -16,19 +16,14 @@
     --secondary-foreground: 24 9.8% 10%;
     --muted: 60 4.8% 95.9%;
     --muted-foreground: 25 5.3% 44.7%;
-    --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
+    --accent: 168 76% 36%;
+    --accent-foreground: 60 9.1% 97.8%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 60 9.1% 97.8%;
     --border: 20 5.9% 90%;
     --input: 20 5.9% 90%;
     --ring: 20 14.3% 4.1%;
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
   }
 }
 
@@ -42,7 +37,7 @@
   }
 }
 
-/* Medical/Clinical Design System */
+/* Clinical Design System */
 @layer components {
   .clinical-container {
     @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -72,14 +67,6 @@
     @apply text-lg text-stone-600 leading-relaxed;
   }
   
-  .clinical-label {
-    @apply text-sm font-medium text-stone-700 uppercase tracking-wide;
-  }
-  
-  .clinical-value {
-    @apply text-2xl font-semibold text-stone-900;
-  }
-  
   .clinical-badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
   }
@@ -96,47 +83,6 @@
     @apply clinical-badge bg-teal-50 text-teal-700 border border-teal-200;
   }
   
-  .clinical-button {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-medium 
-           transition-colors focus-visible:outline-none focus-visible:ring-2 
-           focus-visible:ring-stone-400 focus-visible:ring-offset-2 
-           disabled:pointer-events-none disabled:opacity-50;
-  }
-  
-  .clinical-button-primary {
-    @apply clinical-button bg-stone-900 text-white hover:bg-stone-800 
-           h-10 px-4 py-2;
-  }
-  
-  .clinical-button-secondary {
-    @apply clinical-button bg-white text-stone-900 border border-stone-200 
-           hover:bg-stone-50 hover:text-stone-900 h-10 px-4 py-2;
-  }
-  
-  .clinical-button-ghost {
-    @apply clinical-button hover:bg-stone-100 hover:text-stone-900 
-           h-10 px-4 py-2;
-  }
-  
-  .clinical-input {
-    @apply flex h-10 w-full rounded-md border border-stone-200 bg-white px-3 py-2 
-           text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2 
-           focus:ring-stone-400 focus:ring-offset-2 disabled:cursor-not-allowed 
-           disabled:opacity-50;
-  }
-  
-  .clinical-textarea {
-    @apply clinical-input min-h-[80px] resize-y;
-  }
-  
-  .clinical-select {
-    @apply clinical-input;
-  }
-  
-  .clinical-divider {
-    @apply h-px bg-stone-200 my-6;
-  }
-  
   .clinical-stat {
     @apply flex flex-col gap-1;
   }
@@ -149,66 +95,12 @@
     @apply text-3xl font-semibold text-stone-900;
   }
   
-  .clinical-alert {
-    @apply rounded-lg border p-4;
-  }
-  
-  .clinical-alert-info {
-    @apply clinical-alert bg-blue-50 border-blue-200 text-blue-900;
-  }
-  
-  .clinical-alert-warning {
-    @apply clinical-alert bg-amber-50 border-amber-200 text-amber-900;
-  }
-  
-  .clinical-alert-success {
-    @apply clinical-alert bg-teal-50 border-teal-200 text-teal-900;
-  }
-  
-  .clinical-nav-item {
-    @apply flex items-center gap-3 px-4 py-3 text-sm font-medium text-stone-600 
-           rounded-md hover:bg-stone-100 hover:text-stone-900 transition-colors;
-  }
-  
-  .clinical-nav-item-active {
-    @apply clinical-nav-item bg-stone-100 text-stone-900;
-  }
-  
-  .clinical-step {
-    @apply flex items-center gap-4;
-  }
-  
-  .clinical-step-number {
-    @apply w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center 
-           justify-center text-sm font-semibold;
-  }
-  
-  .clinical-step-number-active {
-    @apply clinical-step-number bg-stone-900 text-white;
-  }
-  
-  .clinical-step-number-complete {
-    @apply clinical-step-number bg-teal-600 text-white;
-  }
-  
   .clinical-progress {
     @apply h-2 bg-stone-100 rounded-full overflow-hidden;
   }
   
   .clinical-progress-bar {
     @apply h-full bg-stone-900 rounded-full transition-all duration-500;
-  }
-  
-  .clinical-table {
-    @apply w-full text-sm;
-  }
-  
-  .clinical-table-header {
-    @apply border-b border-stone-200 bg-stone-50 text-stone-700 font-medium;
-  }
-  
-  .clinical-table-cell {
-    @apply px-4 py-3 border-b border-stone-100;
   }
   
   .clinical-icon-box {
@@ -221,42 +113,5 @@
   
   .clinical-icon-box-accent {
     @apply clinical-icon-box bg-teal-50 text-teal-700;
-  }
-  
-  .clinical-icon-box-warning {
-    @apply clinical-icon-box bg-amber-50 text-amber-700;
-  }
-}
-
-/* Animation utilities */
-@layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.3s ease-out;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .animate-slide-in {
-    animation: slideIn 0.3s ease-out;
-  }
-  
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateX(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
   }
 }
