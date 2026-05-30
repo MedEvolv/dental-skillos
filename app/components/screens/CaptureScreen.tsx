@@ -300,7 +300,7 @@ export default function CaptureScreen({ onNavigate }: CaptureScreenProps) {
                         </Label>
                         <Slider
                           value={[formData.fatigueRating]}
-                          onValueChange={([value]) => setFormData(prev => ({ ...prev, fatigueRating: value }))}
+                          onValueChange={(values) => setFormData(prev => ({ ...prev, fatigueRating: values[0] }))}
                           min={1}
                           max={5}
                           step={1}
@@ -319,7 +319,7 @@ export default function CaptureScreen({ onNavigate }: CaptureScreenProps) {
                         </Label>
                         <Slider
                           value={[formData.difficultyRating]}
-                          onValueChange={([value]) => setFormData(prev => ({ ...prev, difficultyRating: value }))}
+                          onValueChange={(values) => setFormData(prev => ({ ...prev, difficultyRating: values[0] }))}
                           min={1}
                           max={5}
                           step={1}
