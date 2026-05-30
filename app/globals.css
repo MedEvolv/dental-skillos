@@ -2,63 +2,193 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Impeccable: Tinted neutrals, not pure gray/black */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #fafaf9;
+  --foreground: #1c1917;
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+  --border-subtle: #e7e5e4;
+  --border-default: #d6d3d1;
+  --text-primary: #1c1917;
+  --text-secondary: #57534e;
+  --text-tertiary: #78716c;
+  --text-muted: #a8a29e;
 }
 
+/* Impeccable: Smooth scrolling with reduced motion respect */
 html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Impeccable: Base body styles with warm neutral */
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Impeccable: Selection color (tinted, not default blue) */
+::selection {
+  background: rgba(47, 143, 156, 0.2);
+  color: #1c1917;
 }
 
 @layer base {
+  /* Impeccable: Border defaults */
   * {
-    @apply border-slate-200;
+    @apply border-neutral-200;
+  }
+  
+  /* Impeccable: Focus states (visible, not just outline) */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-background;
+  }
+  
+  /* Impeccable: Button reset */
+  button {
+    @apply cursor-pointer;
+  }
+  
+  /* Impeccable: Input reset */
+  input, textarea, select {
+    @apply bg-surface;
+  }
+}
+
+@layer components {
+  /* Impeccable: Card component (flat, not nested) */
+  .card {
+    @apply bg-surface rounded-xl border border-neutral-200 shadow-soft;
+  }
+  
+  .card-elevated {
+    @apply bg-surface rounded-xl border border-neutral-200 shadow-medium;
+  }
+  
+  /* Impeccable: Button variants */
+  .btn-primary {
+    @apply bg-primary-600 text-white font-medium px-5 py-2.5 rounded-lg 
+           hover:bg-primary-700 active:bg-primary-800
+           transition-colors duration-200 ease-out-expo
+           focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-neutral-100 text-neutral-700 font-medium px-5 py-2.5 rounded-lg 
+           hover:bg-neutral-200 active:bg-neutral-300
+           transition-colors duration-200 ease-out-expo
+           focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2;
+  }
+  
+  .btn-ghost {
+    @apply text-neutral-600 font-medium px-5 py-2.5 rounded-lg 
+           hover:bg-neutral-100 hover:text-neutral-900
+           transition-colors duration-200 ease-out-expo;
+  }
+  
+  /* Impeccable: Form inputs */
+  .input {
+    @apply w-full px-4 py-3 bg-surface border border-neutral-300 rounded-lg
+           text-neutral-900 placeholder:text-neutral-400
+           hover:border-neutral-400
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           transition-all duration-200 ease-out-expo;
+  }
+  
+  /* Impeccable: Badge component */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-800;
+  }
+  
+  .badge-accent {
+    @apply badge bg-accent-100 text-accent-800;
+  }
+  
+  .badge-neutral {
+    @apply badge bg-neutral-100 text-neutral-700;
+  }
+  
+  .badge-success {
+    @apply badge bg-success-50 text-success-600;
   }
 }
 
 @layer utilities {
+  /* Impeccable: Text balance for headings */
   .text-balance {
     text-wrap: balance;
   }
   
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
+  /* Impeccable: Line length constraints (readability) */
+  .prose-narrow {
+    max-width: 45ch;
   }
   
-  .glass-effect {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20;
+  .prose-default {
+    max-width: 65ch;
+  }
+  
+  .prose-wide {
+    max-width: 75ch;
+  }
+  
+  /* Impeccable: Gradient text (subtle, not neon) */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-primary-500;
+  }
+  
+  /* Impeccable: Surface backgrounds */
+  .bg-surface {
+    background-color: var(--surface);
+  }
+  
+  .bg-surface-elevated {
+    background-color: var(--surface-elevated);
   }
 }
 
-/* Custom scrollbar */
+/* Impeccable: Custom scrollbar (subtle, not distracting) */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+  background: #d6d3d1;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #a8a29e;
 }
 
-/* Range input styling */
+/* Impeccable: Range input styling */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -67,21 +197,21 @@ input[type="range"] {
 }
 
 input[type="range"]::-webkit-slider-track {
-  background: #e2e8f0;
-  height: 8px;
-  border-radius: 4px;
+  background: #e7e5e4;
+  height: 6px;
+  border-radius: 3px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background: #3b82f6;
-  height: 20px;
-  width: 20px;
+  background: #2f8f9c;
+  height: 18px;
+  width: 18px;
   border-radius: 50%;
   margin-top: -6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
@@ -89,43 +219,61 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 input[type="range"]::-moz-range-track {
-  background: #e2e8f0;
-  height: 8px;
-  border-radius: 4px;
+  background: #e7e5e4;
+  height: 6px;
+  border-radius: 3px;
 }
 
 input[type="range"]::-moz-range-thumb {
-  background: #3b82f6;
-  height: 20px;
-  width: 20px;
+  background: #2f8f9c;
+  height: 18px;
+  width: 18px;
   border-radius: 50%;
   border: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Animation utilities */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+/* Impeccable: Checkbox and radio styling */
+input[type="checkbox"],
+input[type="radio"] {
+  @apply w-5 h-5 rounded border-neutral-300 text-primary-600 
+         focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-0;
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+/* Impeccable: Animation utilities (purposeful, not decorative) */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
   }
-  50% {
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+  100% {
+    background-position: 200% 0;
   }
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Impeccable: Loading skeleton */
+.skeleton {
+  @apply bg-neutral-200 rounded animate-pulse;
+}
+
+/* Impeccable: Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
 }

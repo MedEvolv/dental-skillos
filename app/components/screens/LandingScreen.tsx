@@ -9,10 +9,10 @@ import {
   ChevronRight, 
   Play, 
   FileText,
-  Sparkles,
   Target,
   Clock,
-  TrendingUp
+  TrendingUp,
+  ArrowRight
 } from 'lucide-react';
 import { Screen } from '../../types';
 
@@ -20,26 +20,34 @@ interface LandingScreenProps {
   onNavigate: (screen: Screen) => void;
 }
 
+// Impeccable: Subtle, purposeful motion (not bounce/elastic)
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 12 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+  },
 };
 
 const staggerContainer = {
+  initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
     },
   },
 };
 
+// Impeccable: Skill items with consistent iconography (not rainbow colors)
 const skillItems = [
-  { icon: ScanFace, label: 'Mirror Control', color: 'bg-blue-500' },
-  { icon: Eye, label: 'Indirect Vision', color: 'bg-cyan-500' },
-  { icon: Hand, label: 'Hand Stability', color: 'bg-indigo-500' },
-  { icon: Activity, label: 'Posture', color: 'bg-violet-500' },
+  { icon: ScanFace, label: 'Mirror Control' },
+  { icon: Eye, label: 'Indirect Vision' },
+  { icon: Hand, label: 'Hand Stability' },
+  { icon: Activity, label: 'Posture' },
 ];
 
+// Impeccable: Stats with clear hierarchy
 const stats = [
   { value: '3.2M+', label: 'Dental Students Worldwide' },
   { value: '40%', label: 'Struggle with Indirect Vision' },
@@ -48,86 +56,72 @@ const stats = [
 
 export default function LandingScreen({ onNavigate }: LandingScreenProps) {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl" />
-          <div className="absolute top-40 -left-40 w-96 h-96 bg-cyan-200/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-indigo-200/20 rounded-full blur-3xl" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div className="min-h-screen bg-background">
+      {/* Impeccable: Hero Section - Clean, no gradient blobs */}
+      <section className="relative pt-24 pb-32">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={staggerContainer}
             initial="initial"
             animate="animate"
-            className="text-center max-w-4xl mx-auto"
+            className="text-center max-w-3xl mx-auto"
           >
-            {/* Badge */}
-            <motion.div variants={fadeInUp} className="mb-8">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-sm font-semibold border border-blue-100">
-                <Sparkles className="w-4 h-4" />
+            {/* Impeccable: Badge - subtle, not flashy */}
+            <motion.div variants={fadeInUp} className="mb-6">
+              <span className="badge-primary">
                 Masters&apos; Union Demo Prototype
               </span>
             </motion.div>
 
-            {/* Main Headline */}
+            {/* Impeccable: Main Headline - No gradient text (AI slop anti-pattern) */}
             <motion.h1
               variants={fadeInUp}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-neutral-900 leading-tight tracking-tight mb-6"
             >
               Dental education has digitized{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                knowledge
-              </span>
+              <span className="text-primary-600">knowledge</span>
               , but not{' '}
-              <span className="bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-                embodied skill
-              </span>
+              <span className="text-primary-600">embodied skill</span>
             </motion.h1>
 
-            {/* Subheadline */}
+            {/* Impeccable: Subheadline - Proper line length (prose-default) */}
             <motion.p
               variants={fadeInUp}
-              className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed"
+              className="text-lg text-neutral-600 mb-10 max-w-2xl mx-auto leading-relaxed prose-default"
             >
               Dental SkillOS uses AI to transform practice videos into structured feedback, 
               helping students master the physical skills that textbooks cannot teach.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* Impeccable: CTA Buttons - Clear hierarchy, flat design */}
             <motion.div
               variants={fadeInUp}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
             >
               <motion.button
                 onClick={() => onNavigate('setup')}
-                className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl shadow-xl shadow-blue-500/25 flex items-center gap-3 text-lg"
-                whileHover={{ 
-                  scale: 1.05, 
-                  boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.5)' 
-                }}
-                whileTap={{ scale: 0.95 }}
+                className="btn-primary flex items-center gap-2 text-base"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
               >
-                <Play className="w-5 h-5" />
+                <Play className="w-4 h-4" />
                 Start Indirect Vision Demo
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4" />
               </motion.button>
               
               <motion.button
                 onClick={() => onNavigate('report')}
-                className="px-8 py-4 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 shadow-lg shadow-slate-200/50 flex items-center gap-3 text-lg hover:border-slate-300 transition-colors"
+                className="btn-ghost flex items-center gap-2"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <FileText className="w-5 h-5" />
+                <FileText className="w-4 h-4" />
                 View Sample Report
               </motion.button>
             </motion.div>
 
-            {/* Skill Pills */}
+            {/* Impeccable: Skill Pills - Consistent styling, not rainbow */}
             <motion.div
               variants={fadeInUp}
               className="flex flex-wrap justify-center gap-3"
@@ -135,15 +129,15 @@ export default function LandingScreen({ onNavigate }: LandingScreenProps) {
               {skillItems.map((skill, index) => (
                 <motion.div
                   key={skill.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5 + index * 0.1 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md border border-slate-100"
+                  transition={{ delay: 0.4 + index * 0.08, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex items-center gap-2 px-4 py-2 bg-surface rounded-full border border-neutral-200 shadow-soft"
                 >
-                  <div className={`w-8 h-8 ${skill.color} rounded-lg flex items-center justify-center`}>
-                    <skill.icon className="w-4 h-4 text-white" />
+                  <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
+                    <skill.icon className="w-4 h-4 text-primary-600" />
                   </div>
-                  <span className="text-sm font-medium text-slate-700">{skill.label}</span>
+                  <span className="text-sm font-medium text-neutral-700">{skill.label}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -151,27 +145,28 @@ export default function LandingScreen({ onNavigate }: LandingScreenProps) {
         </div>
       </section>
 
-      {/* Problem Statement Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Impeccable: Problem Statement Section - Warm neutral background */}
+      <section className="py-24 bg-neutral-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-neutral-900 mb-4 tracking-tight">
               The Hardest Parts of Dentistry are Still{' '}
-              <span className="text-blue-600">Physical</span>
+              <span className="text-primary-600">Physical</span>
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto prose-default">
               Students can access notes, lectures, videos, MCQs, and AI tutors. 
               But the skills that matter most happen in the body, not the mind.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* Impeccable: Cards - Flat design, no nesting, warm neutrals */}
+          <div className="grid md:grid-cols-3 gap-6">
             {[
               {
                 icon: Clock,
@@ -191,65 +186,65 @@ export default function LandingScreen({ onNavigate }: LandingScreenProps) {
             ].map((item, index) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300"
+                transition={{ delay: index * 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="card-elevated p-8 hover:shadow-lifted transition-shadow duration-300"
               >
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-blue-500/25">
-                  <item.icon className="w-7 h-7 text-white" />
+                <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
+                  <item.icon className="w-6 h-6 text-primary-600" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{item.description}</p>
+                <h3 className="text-xl font-semibold text-neutral-900 mb-3">{item.title}</h3>
+                <p className="text-neutral-600 leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Impeccable: Stats Section - Dark but warm, not pure black */}
+      <section className="py-20 bg-neutral-900">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.15, duration: 0.5 }}
+                transition={{ delay: index * 0.12, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                <div className="text-4xl sm:text-5xl font-semibold text-primary-400 mb-2 tracking-tight">
                   {stat.value}
                 </div>
-                <div className="text-slate-400 text-lg">{stat.label}</div>
+                <div className="text-neutral-400 text-base">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Solution Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Impeccable: Solution Section - Clean background */}
+      <section className="py-24 bg-background">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-neutral-900 mb-4 tracking-tight">
               From Practice Video to{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                Structured Feedback
-              </span>
+              <span className="text-primary-600">Structured Feedback</span>
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto prose-default">
               Dental SkillOS closes the loop between practice and improvement.
             </p>
           </motion.div>
 
+          {/* Impeccable: Step cards - Connected flow, flat design */}
           <div className="grid md:grid-cols-4 gap-6">
             {[
               { step: '1', title: 'Record', desc: 'Student practices with phone camera' },
@@ -259,22 +254,22 @@ export default function LandingScreen({ onNavigate }: LandingScreenProps) {
             ].map((item, index) => (
               <motion.div
                 key={item.step}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
+                transition={{ delay: index * 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="relative"
               >
-                <div className="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 text-center relative z-10">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4 shadow-lg shadow-blue-500/25">
+                <div className="card p-6 text-center relative z-10 h-full">
+                  <div className="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mx-auto mb-4">
                     {item.step}
                   </div>
-                  <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-slate-600">{item.desc}</p>
+                  <h3 className="font-semibold text-neutral-900 mb-2">{item.title}</h3>
+                  <p className="text-sm text-neutral-600">{item.desc}</p>
                 </div>
                 {index < 3 && (
                   <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-0">
-                    <ChevronRight className="w-6 h-6 text-slate-300" />
+                    <ChevronRight className="w-5 h-5 text-neutral-300" />
                   </div>
                 )}
               </motion.div>
@@ -283,47 +278,44 @@ export default function LandingScreen({ onNavigate }: LandingScreenProps) {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-white">
+      {/* Impeccable: CTA Section - Warm accent for energy */}
+      <section className="py-24 bg-accent-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-neutral-900 mb-6 tracking-tight">
               Ready to See the Demo?
             </h2>
-            <p className="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
+            <p className="text-lg text-neutral-600 mb-10 max-w-2xl mx-auto prose-default">
               Experience how Dental SkillOS transforms a simple mirror-guided task 
               into actionable feedback for skill development.
             </p>
             <motion.button
               onClick={() => onNavigate('setup')}
-              className="px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-lg rounded-xl shadow-xl shadow-blue-500/25 flex items-center gap-3 mx-auto"
-              whileHover={{ 
-                scale: 1.05, 
-                boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.5)' 
-              }}
-              whileTap={{ scale: 0.95 }}
+              className="btn-primary flex items-center gap-2 mx-auto text-base px-8 py-4"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Play className="w-6 h-6" />
+              <Play className="w-5 h-5" />
               Start the Indirect Vision Demo
             </motion.button>
           </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 bg-slate-900 text-slate-400">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Impeccable: Footer - Clean, minimal */}
+      <footer className="py-12 bg-neutral-900 text-neutral-400">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
                 <ScanFace className="w-4 h-4 text-white" />
               </div>
-              <span className="text-white font-semibold">Dental SkillOS</span>
+              <span className="text-white font-medium">Dental SkillOS</span>
             </div>
             <p className="text-sm">
               Masters&apos; Union Demo Prototype • Prepared by ArchLife • SkillData Lab

@@ -5,7 +5,6 @@ import {
   Check, 
   ScanFace, 
   Smartphone, 
-  FileText, 
   PenTool, 
   Lightbulb, 
   AlertTriangle,
@@ -210,10 +209,10 @@ export default function SetupScreen({ onNavigate }: SetupScreenProps) {
                 <ol className="space-y-2 text-sm text-slate-600 list-decimal list-inside">
                   <li>Position mirror to view target indirectly (eyes on mirror only)</li>
                   <li>Start recording (5-sec countdown recommended)</li>
-                  <li>State clearly: "Attempt [number], Participant [ID], Date [today]"</li>
+                  <li>State clearly: &quot;Attempt [number], Participant [ID], Date [today]&quot;</li>
                   <li>Begin task: Trace digital target path using mirror vision ONLY</li>
                   <li>Complete full path from green start to red end</li>
-                  <li>State: "Complete", wait 3 seconds, stop recording</li>
+                  <li>State: &quot;Complete&quot;, wait 3 seconds, stop recording</li>
                 </ol>
               </div>
             </motion.div>
