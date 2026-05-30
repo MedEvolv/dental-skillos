@@ -3,324 +3,374 @@
 import { motion } from 'framer-motion';
 import { 
   ScanFace, 
-  Eye, 
-  Hand, 
-  Activity, 
-  ChevronRight, 
-  Play, 
-  FileText,
+  BarChart3, 
+  GraduationCap, 
+  ArrowRight,
+  CheckCircle2,
+  Video,
   Target,
-  Clock,
-  TrendingUp,
-  ArrowRight
+  LineChart,
+  Shield,
+  Users
 } from 'lucide-react';
 import { Screen } from '../../types';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
 interface LandingScreenProps {
   onNavigate: (screen: Screen) => void;
 }
 
-// Impeccable: Subtle, purposeful motion (not bounce/elastic)
-const fadeInUp = {
-  initial: { opacity: 0, y: 12 },
-  animate: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }
-  },
+const fadeIn = {
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }
 };
 
 const staggerContainer = {
-  initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.08,
-    },
-  },
+      staggerChildren: 0.05
+    }
+  }
 };
-
-// Impeccable: Skill items with consistent iconography (not rainbow colors)
-const skillItems = [
-  { icon: ScanFace, label: 'Mirror Control' },
-  { icon: Eye, label: 'Indirect Vision' },
-  { icon: Hand, label: 'Hand Stability' },
-  { icon: Activity, label: 'Posture' },
-];
-
-// Impeccable: Stats with clear hierarchy
-const stats = [
-  { value: '3.2M+', label: 'Dental Students Worldwide' },
-  { value: '40%', label: 'Struggle with Indirect Vision' },
-  { value: 'Delayed', label: 'Feedback in Traditional Training' },
-];
 
 export default function LandingScreen({ onNavigate }: LandingScreenProps) {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Impeccable: Hero Section - Clean, no gradient blobs */}
-      <section className="relative pt-24 pb-32">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-stone-50">
+      {/* Clinical Header */}
+      <header className="clinical-header">
+        <div className="clinical-container">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-stone-900 rounded-md flex items-center justify-center">
+                <ScanFace className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-lg font-semibold text-stone-900">Dental SkillOS</h1>
+                <p className="text-xs text-stone-500">MirrorDex v0</p>
+              </div>
+            </div>
+            <Badge variant="secondary" className="text-xs">
+              Masters&apos; Union Demo
+            </Badge>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="clinical-section bg-white border-b border-stone-200">
+        <div className="clinical-container">
           <motion.div
-            variants={staggerContainer}
             initial="initial"
             animate="animate"
-            className="text-center max-w-3xl mx-auto"
+            variants={staggerContainer}
+            className="max-w-3xl"
           >
-            {/* Impeccable: Badge - subtle, not flashy */}
-            <motion.div variants={fadeInUp} className="mb-6">
-              <span className="badge-primary">
-                Masters&apos; Union Demo Prototype
-              </span>
+            <motion.div variants={fadeIn} className="mb-6">
+              <Badge className="clinical-badge-accent mb-4">
+                Preclinical Training Platform
+              </Badge>
             </motion.div>
-
-            {/* Impeccable: Main Headline - No gradient text (AI slop anti-pattern) */}
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-neutral-900 leading-tight tracking-tight mb-6"
+            
+            <motion.h1 
+              variants={fadeIn}
+              className="clinical-title mb-6"
             >
-              Dental education has digitized{' '}
-              <span className="text-primary-600">knowledge</span>
-              , but not{' '}
-              <span className="text-primary-600">embodied skill</span>
+              AI-Powered Feedback for
+              <br />
+              <span className="text-stone-600">Indirect Vision Skills</span>
             </motion.h1>
-
-            {/* Impeccable: Subheadline - Proper line length (prose-default) */}
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg text-neutral-600 mb-10 max-w-2xl mx-auto leading-relaxed prose-default"
+            
+            <motion.p 
+              variants={fadeIn}
+              className="clinical-subtitle mb-8 max-w-2xl"
             >
-              Dental SkillOS uses AI to transform practice videos into structured feedback, 
-              helping students master the physical skills that textbooks cannot teach.
+              Record your mirror-guided practice sessions and receive detailed 
+              performance analytics. Designed for dental students mastering 
+              intraoral mirror work before patient contact.
             </motion.p>
-
-            {/* Impeccable: CTA Buttons - Clear hierarchy, flat design */}
-            <motion.div
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            
+            <motion.div 
+              variants={fadeIn}
+              className="flex flex-wrap gap-4"
             >
-              <motion.button
+              <Button 
+                size="lg"
                 onClick={() => onNavigate('setup')}
-                className="btn-primary flex items-center gap-2 text-base"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
+                className="clinical-button-primary gap-2"
               >
-                <Play className="w-4 h-4" />
-                Start Indirect Vision Demo
+                <Video className="w-4 h-4" />
+                Start Practice Session
                 <ArrowRight className="w-4 h-4" />
-              </motion.button>
+              </Button>
               
-              <motion.button
+              <Button 
+                variant="outline"
+                size="lg"
                 onClick={() => onNavigate('report')}
-                className="btn-ghost flex items-center gap-2"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="clinical-button-secondary gap-2"
               >
-                <FileText className="w-4 h-4" />
+                <BarChart3 className="w-4 h-4" />
                 View Sample Report
-              </motion.button>
+              </Button>
             </motion.div>
 
-            {/* Impeccable: Skill Pills - Consistent styling, not rainbow */}
-            <motion.div
-              variants={fadeInUp}
-              className="flex flex-wrap justify-center gap-3"
+            <motion.div 
+              variants={fadeIn}
+              className="mt-8 flex items-center gap-6 text-sm text-stone-500"
             >
-              {skillItems.map((skill, index) => (
-                <motion.div
-                  key={skill.label}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.4 + index * 0.08, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex items-center gap-2 px-4 py-2 bg-surface rounded-full border border-neutral-200 shadow-soft"
-                >
-                  <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <skill.icon className="w-4 h-4 text-primary-600" />
-                  </div>
-                  <span className="text-sm font-medium text-neutral-700">{skill.label}</span>
-                </motion.div>
-              ))}
+              <span className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-teal-600" />
+                No patient data required
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-teal-600" />
+                Instant AI analysis
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-teal-600" />
+                Progress tracking
+              </span>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Impeccable: Problem Statement Section - Warm neutral background */}
-      <section className="py-24 bg-neutral-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-semibold text-neutral-900 mb-4 tracking-tight">
-              The Hardest Parts of Dentistry are Still{' '}
-              <span className="text-primary-600">Physical</span>
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto prose-default">
-              Students can access notes, lectures, videos, MCQs, and AI tutors. 
-              But the skills that matter most happen in the body, not the mind.
-            </p>
-          </motion.div>
+      {/* How It Works */}
+      <section className="clinical-section">
+        <div className="clinical-container">
+          <div className="mb-10">
+            <h2 className="text-2xl font-semibold text-stone-900 mb-2">How It Works</h2>
+            <p className="text-stone-600">Three steps to structured feedback</p>
+          </div>
 
-          {/* Impeccable: Cards - Flat design, no nesting, warm neutrals */}
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: Clock,
-                title: 'Delayed Feedback',
-                description: 'Students practice repeatedly but receive feedback hours or days later, often focused only on final output.',
-              },
-              {
+                step: '01',
+                title: 'Setup',
+                description: 'Configure your recording environment with the digital target and macro camera setup.',
                 icon: Target,
-                title: 'Subjective Assessment',
-                description: 'Skill evaluation depends on faculty availability and varies between instructors, lacking objective metrics.',
               },
               {
-                icon: TrendingUp,
-                title: 'No Progress Tracking',
-                description: 'Students cannot see their improvement over time or understand exactly what to practice next.',
+                step: '02',
+                title: 'Record',
+                description: 'Practice mirror-guided tracing while recording. Upload when complete.',
+                icon: Video,
+              },
+              {
+                step: '03',
+                title: 'Analyze',
+                description: 'Receive detailed metrics on mirror stability, field control, and technique.',
+                icon: LineChart,
               },
             ].map((item, index) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="card-elevated p-8 hover:shadow-lifted transition-shadow duration-300"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }}
               >
-                <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
-                  <item.icon className="w-6 h-6 text-primary-600" />
-                </div>
-                <h3 className="text-xl font-semibold text-neutral-900 mb-3">{item.title}</h3>
-                <p className="text-neutral-600 leading-relaxed">{item.description}</p>
+                <Card className="clinical-card h-full">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="clinical-icon-box-primary shrink-0">
+                        <item.icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-medium text-stone-400 mb-1">
+                          Step {item.step}
+                        </div>
+                        <h3 className="text-lg font-semibold text-stone-900 mb-2">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-stone-600 leading-relaxed">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Impeccable: Stats Section - Dark but warm, not pure black */}
-      <section className="py-20 bg-neutral-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.12, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className="text-4xl sm:text-5xl font-semibold text-primary-400 mb-2 tracking-tight">
-                  {stat.value}
-                </div>
-                <div className="text-neutral-400 text-base">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Separator />
 
-      {/* Impeccable: Solution Section - Clean background */}
-      <section className="py-24 bg-background">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-semibold text-neutral-900 mb-4 tracking-tight">
-              From Practice Video to{' '}
-              <span className="text-primary-600">Structured Feedback</span>
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto prose-default">
-              Dental SkillOS closes the loop between practice and improvement.
-            </p>
-          </motion.div>
-
-          {/* Impeccable: Step cards - Connected flow, flat design */}
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { step: '1', title: 'Record', desc: 'Student practices with phone camera' },
-              { step: '2', title: 'Upload', desc: 'Session submitted to system' },
-              { step: '3', title: 'Analyze', desc: 'AI extracts skill signals' },
-              { step: '4', title: 'Improve', desc: 'Personalized feedback report' },
-            ].map((item, index) => (
-              <motion.div
-                key={item.step}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="relative"
-              >
-                <div className="card p-6 text-center relative z-10 h-full">
-                  <div className="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold mx-auto mb-4">
-                    {item.step}
+      {/* Metrics Preview */}
+      <section className="clinical-section bg-white">
+        <div className="clinical-container">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge variant="outline" className="mb-4">
+                Performance Analytics
+              </Badge>
+              <h2 className="text-2xl font-semibold text-stone-900 mb-4">
+                Detailed Session Reports
+              </h2>
+              <p className="text-stone-600 mb-6 leading-relaxed">
+                Every practice session generates a comprehensive report tracking 
+                mirror reposition events, field loss incidents, target accuracy, 
+                and overall technique smoothness. Compare attempts over time to 
+                measure improvement.
+              </p>
+              
+              <div className="space-y-4">
+                {[
+                  { label: 'Mirror Stability Score', value: '78/100' },
+                  { label: 'Field Control', value: '12 events' },
+                  { label: 'Target Accuracy', value: '85%' },
+                ].map((stat) => (
+                  <div key={stat.label} className="flex items-center justify-between py-3 border-b border-stone-100">
+                    <span className="text-sm text-stone-600">{stat.label}</span>
+                    <span className="text-sm font-semibold text-stone-900">{stat.value}</span>
                   </div>
-                  <h3 className="font-semibold text-neutral-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-neutral-600">{item.desc}</p>
-                </div>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-0">
-                    <ChevronRight className="w-5 h-5 text-neutral-300" />
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                ))}
+              </div>
+            </div>
 
-      {/* Impeccable: CTA Section - Warm accent for energy */}
-      <section className="py-24 bg-accent-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-semibold text-neutral-900 mb-6 tracking-tight">
-              Ready to See the Demo?
-            </h2>
-            <p className="text-lg text-neutral-600 mb-10 max-w-2xl mx-auto prose-default">
-              Experience how Dental SkillOS transforms a simple mirror-guided task 
-              into actionable feedback for skill development.
-            </p>
-            <motion.button
-              onClick={() => onNavigate('setup')}
-              className="btn-primary flex items-center gap-2 mx-auto text-base px-8 py-4"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.3 }}
             >
-              <Play className="w-5 h-5" />
-              Start the Indirect Vision Demo
-            </motion.button>
-          </motion.div>
+              <Card className="clinical-card-elevated overflow-hidden">
+                <div className="bg-stone-50 px-6 py-4 border-b border-stone-200">
+                  <div className="flex items-center gap-3">
+                    <BarChart3 className="w-5 h-5 text-stone-600" />
+                    <span className="font-medium text-stone-900">Session Analysis</span>
+                    <Badge variant="secondary" className="ml-auto text-xs">
+                      Attempt #3
+                    </Badge>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="clinical-stat">
+                      <span className="clinical-stat-label">Duration</span>
+                      <span className="clinical-stat-value">2:34</span>
+                    </div>
+                    <div className="clinical-stat">
+                      <span className="clinical-stat-label">Events</span>
+                      <span className="clinical-stat-value">8</span>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {[
+                      { label: 'Mirror Repositions', count: 3, color: 'bg-stone-800' },
+                      { label: 'Field Loss', count: 2, color: 'bg-amber-500' },
+                      { label: 'Target Misses', count: 1, color: 'bg-teal-600' },
+                    ].map((item) => (
+                      <div key={item.label} className="flex items-center gap-3">
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-sm text-stone-600">{item.label}</span>
+                            <span className="text-sm font-medium text-stone-900">{item.count}</span>
+                          </div>
+                          <div className="clinical-progress">
+                            <div 
+                              className={`clinical-progress-bar ${item.color}`}
+                              style={{ width: `${(item.count / 5) * 100}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Impeccable: Footer - Clean, minimal */}
-      <footer className="py-12 bg-neutral-900 text-neutral-400">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Separator />
+
+      {/* Trust Indicators */}
+      <section className="clinical-section">
+        <div className="clinical-container">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="flex items-start gap-4">
+              <div className="clinical-icon-box-accent shrink-0">
+                <Shield className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-stone-900 mb-1">Privacy First</h3>
+                <p className="text-sm text-stone-600">
+                  No patient data collection. All practice sessions are anonymized 
+                  and used solely for skill development.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="clinical-icon-box-accent shrink-0">
+                <GraduationCap className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-stone-900 mb-1">Educational Use</h3>
+                <p className="text-sm text-stone-600">
+                  Designed for preclinical training. Not for clinical diagnosis 
+                  or patient care decisions.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="clinical-icon-box-accent shrink-0">
+                <Users className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-stone-900 mb-1">Faculty Integration</h3>
+                <p className="text-sm text-stone-600">
+                  Reports can be reviewed by instructors. Faculty comments and 
+                  grades supported.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer CTA */}
+      <section className="clinical-section bg-stone-900 text-white">
+        <div className="clinical-container text-center">
+          <h2 className="text-2xl font-semibold mb-4">Ready to Practice?</h2>
+          <p className="text-stone-400 mb-8 max-w-xl mx-auto">
+            Set up your recording environment and begin your first structured 
+            mirror practice session.
+          </p>
+          <Button 
+            size="lg"
+            onClick={() => onNavigate('setup')}
+            className="bg-white text-stone-900 hover:bg-stone-100 gap-2"
+          >
+            <Video className="w-4 h-4" />
+            Begin Setup
+            <ArrowRight className="w-4 h-4" />
+          </Button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-stone-950 text-stone-500 py-8 border-t border-stone-800">
+        <div className="clinical-container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                <ScanFace className="w-4 h-4 text-white" />
+              <div className="w-6 h-6 bg-stone-800 rounded flex items-center justify-center">
+                <ScanFace className="w-4 h-4" />
               </div>
-              <span className="text-white font-medium">Dental SkillOS</span>
+              <span className="text-sm">Dental SkillOS • MirrorDex v0</span>
             </div>
-            <p className="text-sm">
-              Masters&apos; Union Demo Prototype • Prepared by ArchLife • SkillData Lab
+            <p className="text-xs">
+              Prototype for educational use only. Not for clinical application.
             </p>
-            <p className="text-sm">© 2026 ArchLife. Internal use only.</p>
           </div>
         </div>
       </footer>

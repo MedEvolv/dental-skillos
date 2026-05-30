@@ -2,282 +2,261 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Impeccable: Tinted neutrals, not pure gray/black */
-:root {
-  --background: #fafaf9;
-  --foreground: #1c1917;
-  --surface: #ffffff;
-  --surface-elevated: #ffffff;
-  --border-subtle: #e7e5e4;
-  --border-default: #d6d3d1;
-  --text-primary: #1c1917;
-  --text-secondary: #57534e;
-  --text-tertiary: #78716c;
-  --text-muted: #a8a29e;
-}
-
-/* Impeccable: Smooth scrolling with reduced motion respect */
-html {
-  scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
   }
-  
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Impeccable: Base body styles with warm neutral */
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-/* Impeccable: Selection color (tinted, not default blue) */
-::selection {
-  background: rgba(47, 143, 156, 0.2);
-  color: #1c1917;
 }
 
 @layer base {
-  /* Impeccable: Border defaults */
   * {
-    @apply border-neutral-200;
+    @apply border-border;
   }
-  
-  /* Impeccable: Focus states (visible, not just outline) */
-  :focus-visible {
-    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-background;
-  }
-  
-  /* Impeccable: Button reset */
-  button {
-    @apply cursor-pointer;
-  }
-  
-  /* Impeccable: Input reset */
-  input, textarea, select {
-    @apply bg-surface;
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
+/* Medical/Clinical Design System */
 @layer components {
-  /* Impeccable: Card component (flat, not nested) */
-  .card {
-    @apply bg-surface rounded-xl border border-neutral-200 shadow-soft;
+  .clinical-container {
+    @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   
-  .card-elevated {
-    @apply bg-surface rounded-xl border border-neutral-200 shadow-medium;
+  .clinical-header {
+    @apply bg-white border-b border-stone-200 sticky top-0 z-50;
   }
   
-  /* Impeccable: Button variants */
-  .btn-primary {
-    @apply bg-primary-600 text-white font-medium px-5 py-2.5 rounded-lg;
-    @apply hover:bg-primary-700 active:bg-primary-800;
-    @apply transition-colors duration-200;
-    @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  .clinical-section {
+    @apply py-12 md:py-16;
   }
   
-  .btn-secondary {
-    @apply bg-neutral-100 text-neutral-700 font-medium px-5 py-2.5 rounded-lg;
-    @apply hover:bg-neutral-200 active:bg-neutral-300;
-    @apply transition-colors duration-200;
-    @apply focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2;
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  .clinical-card {
+    @apply bg-white rounded-lg border border-stone-200 shadow-sm;
   }
   
-  .btn-ghost {
-    @apply text-neutral-600 font-medium px-5 py-2.5 rounded-lg;
-    @apply hover:bg-neutral-100 hover:text-neutral-900;
-    @apply transition-colors duration-200;
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  .clinical-card-elevated {
+    @apply bg-white rounded-lg border border-stone-200 shadow-md;
   }
   
-  /* Impeccable: Form inputs */
-  .input {
-    @apply w-full px-4 py-3 bg-surface border border-neutral-300 rounded-lg;
-    @apply text-neutral-900 placeholder:text-neutral-400;
-    @apply hover:border-neutral-400;
-    @apply focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
-    @apply transition-all duration-200;
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  .clinical-title {
+    @apply text-3xl md:text-4xl font-semibold tracking-tight text-stone-900;
   }
   
-  /* Impeccable: Badge component */
-  .badge {
+  .clinical-subtitle {
+    @apply text-lg text-stone-600 leading-relaxed;
+  }
+  
+  .clinical-label {
+    @apply text-sm font-medium text-stone-700 uppercase tracking-wide;
+  }
+  
+  .clinical-value {
+    @apply text-2xl font-semibold text-stone-900;
+  }
+  
+  .clinical-badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
   }
   
-  .badge-primary {
-    @apply badge bg-primary-100 text-primary-800;
+  .clinical-badge-primary {
+    @apply clinical-badge bg-stone-900 text-white;
   }
   
-  .badge-accent {
-    @apply badge bg-accent-100 text-accent-800;
+  .clinical-badge-secondary {
+    @apply clinical-badge bg-stone-100 text-stone-700 border border-stone-200;
   }
   
-  .badge-neutral {
-    @apply badge bg-neutral-100 text-neutral-700;
+  .clinical-badge-accent {
+    @apply clinical-badge bg-teal-50 text-teal-700 border border-teal-200;
   }
   
-  .badge-success {
-    @apply badge bg-success-50 text-success-600;
+  .clinical-button {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium 
+           transition-colors focus-visible:outline-none focus-visible:ring-2 
+           focus-visible:ring-stone-400 focus-visible:ring-offset-2 
+           disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .clinical-button-primary {
+    @apply clinical-button bg-stone-900 text-white hover:bg-stone-800 
+           h-10 px-4 py-2;
+  }
+  
+  .clinical-button-secondary {
+    @apply clinical-button bg-white text-stone-900 border border-stone-200 
+           hover:bg-stone-50 hover:text-stone-900 h-10 px-4 py-2;
+  }
+  
+  .clinical-button-ghost {
+    @apply clinical-button hover:bg-stone-100 hover:text-stone-900 
+           h-10 px-4 py-2;
+  }
+  
+  .clinical-input {
+    @apply flex h-10 w-full rounded-md border border-stone-200 bg-white px-3 py-2 
+           text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2 
+           focus:ring-stone-400 focus:ring-offset-2 disabled:cursor-not-allowed 
+           disabled:opacity-50;
+  }
+  
+  .clinical-textarea {
+    @apply clinical-input min-h-[80px] resize-y;
+  }
+  
+  .clinical-select {
+    @apply clinical-input;
+  }
+  
+  .clinical-divider {
+    @apply h-px bg-stone-200 my-6;
+  }
+  
+  .clinical-stat {
+    @apply flex flex-col gap-1;
+  }
+  
+  .clinical-stat-label {
+    @apply text-sm text-stone-500;
+  }
+  
+  .clinical-stat-value {
+    @apply text-3xl font-semibold text-stone-900;
+  }
+  
+  .clinical-alert {
+    @apply rounded-lg border p-4;
+  }
+  
+  .clinical-alert-info {
+    @apply clinical-alert bg-blue-50 border-blue-200 text-blue-900;
+  }
+  
+  .clinical-alert-warning {
+    @apply clinical-alert bg-amber-50 border-amber-200 text-amber-900;
+  }
+  
+  .clinical-alert-success {
+    @apply clinical-alert bg-teal-50 border-teal-200 text-teal-900;
+  }
+  
+  .clinical-nav-item {
+    @apply flex items-center gap-3 px-4 py-3 text-sm font-medium text-stone-600 
+           rounded-md hover:bg-stone-100 hover:text-stone-900 transition-colors;
+  }
+  
+  .clinical-nav-item-active {
+    @apply clinical-nav-item bg-stone-100 text-stone-900;
+  }
+  
+  .clinical-step {
+    @apply flex items-center gap-4;
+  }
+  
+  .clinical-step-number {
+    @apply w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center 
+           justify-center text-sm font-semibold;
+  }
+  
+  .clinical-step-number-active {
+    @apply clinical-step-number bg-stone-900 text-white;
+  }
+  
+  .clinical-step-number-complete {
+    @apply clinical-step-number bg-teal-600 text-white;
+  }
+  
+  .clinical-progress {
+    @apply h-2 bg-stone-100 rounded-full overflow-hidden;
+  }
+  
+  .clinical-progress-bar {
+    @apply h-full bg-stone-900 rounded-full transition-all duration-500;
+  }
+  
+  .clinical-table {
+    @apply w-full text-sm;
+  }
+  
+  .clinical-table-header {
+    @apply border-b border-stone-200 bg-stone-50 text-stone-700 font-medium;
+  }
+  
+  .clinical-table-cell {
+    @apply px-4 py-3 border-b border-stone-100;
+  }
+  
+  .clinical-icon-box {
+    @apply w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center;
+  }
+  
+  .clinical-icon-box-primary {
+    @apply clinical-icon-box bg-stone-900 text-white;
+  }
+  
+  .clinical-icon-box-accent {
+    @apply clinical-icon-box bg-teal-50 text-teal-700;
+  }
+  
+  .clinical-icon-box-warning {
+    @apply clinical-icon-box bg-amber-50 text-amber-700;
   }
 }
 
+/* Animation utilities */
 @layer utilities {
-  /* Impeccable: Text balance for headings */
-  .text-balance {
-    text-wrap: balance;
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
   }
   
-  /* Impeccable: Line length constraints (readability) */
-  .prose-narrow {
-    max-width: 45ch;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
-  .prose-default {
-    max-width: 65ch;
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
   }
   
-  .prose-wide {
-    max-width: 75ch;
-  }
-  
-  /* Impeccable: Gradient text (subtle, not neon) */
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-primary-500;
-  }
-  
-  /* Impeccable: Surface backgrounds */
-  .bg-surface {
-    background-color: var(--surface);
-  }
-  
-  .bg-surface-elevated {
-    background-color: var(--surface-elevated);
-  }
-}
-
-/* Impeccable: Custom scrollbar (subtle, not distracting) */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #d6d3d1;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a29e;
-}
-
-/* Impeccable: Range input styling */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-input[type="range"]::-webkit-slider-track {
-  background: #e7e5e4;
-  height: 6px;
-  border-radius: 3px;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  background: #2f8f9c;
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  margin-top: -6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-}
-
-input[type="range"]::-moz-range-track {
-  background: #e7e5e4;
-  height: 6px;
-  border-radius: 3px;
-}
-
-input[type="range"]::-moz-range-thumb {
-  background: #2f8f9c;
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  border: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Impeccable: Checkbox and radio styling */
-input[type="checkbox"],
-input[type="radio"] {
-  @apply w-5 h-5 rounded border-neutral-300 text-primary-600 
-         focus:ring-2 focus:ring-primary-500/20 focus:ring-offset-0;
-}
-
-/* Impeccable: Animation utilities (purposeful, not decorative) */
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-/* Impeccable: Loading skeleton */
-.skeleton {
-  @apply bg-neutral-200 rounded animate-pulse;
-}
-
-/* Impeccable: Print styles */
-@media print {
-  body {
-    background: white;
-    color: black;
-  }
-  
-  .no-print {
-    display: none !important;
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
