@@ -14,7 +14,6 @@ import {
   AlertCircle,
   Play,
   X,
-  ArrowRight,
   ArrowLeft
 } from 'lucide-react';
 import { useState, useRef } from 'react';
@@ -22,10 +21,8 @@ import { Screen } from '../../types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';

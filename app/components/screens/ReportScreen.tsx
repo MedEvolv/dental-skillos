@@ -14,7 +14,6 @@ import {
   Hash,
   Lightbulb,
   Share2,
-  Download,
   RotateCcw,
   BarChart3,
   ChevronLeft,
