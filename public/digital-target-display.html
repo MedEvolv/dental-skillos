@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Dental SkillOS - Digital Target</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+      touch-action: none;
+    }
+    
+    .app {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Header with controls */
+    .header {
+      background: #1a1a2e;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+    
+    .logo {
+      font-size: 14px;
+      font-weight: 600;
+      color: #3b82f6;
+    }
+    
+    .controls {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .btn {
+      background: #333;
+      border: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .btn:hover, .btn:active {
+      background: #444;
+    }
+    
+    .btn.primary {
+      background: #3b82f6;
+    }
+    
+    .btn.primary:hover, .btn.primary:active {
+      background: #2563eb;
+    }
+    
+    /* Settings panel */
+    .settings {
+      background: #16213e;
+      padding: 12px 16px;
+      display: none;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #333;
+    }
+    
+    .settings.active {
+      display: flex;
+    }
+    
+    .setting-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .setting-label {
+      font-size: 10px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .setting-control {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .setting-btn {
+      background: #333;
+      border: 1px solid #444;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    
+    .setting-btn.active {
+      background: #3b82f6;
+      border-color: #3b82f6;
+    }
+    
+    /* Main display area */
+    .display-area {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #0a0a0a;
+      position: relative;
+    }
+    
+    /* Target container - 2cm x 2cm at 96 DPI = ~75px */
+    .target-container {
+      width: 75px;
+      height: 75px;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .target-container.large {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .target-container.small {
+      width: 56px;
+      height: 56px;
+    }
+    
+    /* Scale indicator */
+    .scale-indicator {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: #666;
+      white-space: nowrap;
+    }
+    
+    /* Timer overlay */
+    .timer-overlay {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 32px;
+      font-weight: 300;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 2px;
+      display: none;
+    }
+    
+    .timer-overlay.active {
+      display: block;
+    }
+    
+    /* Status bar */
+    .status-bar {
+      background: #1a1a2e;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      border-top: 1px solid #333;
+    }
+    
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #888;
+    }
+    
+    .status-value {
+      color: #3b82f6;
+      font-weight: 600;
+    }
+    
+    /* Fullscreen button */
+    .fullscreen-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.7);
+      border: none;
+      color: #fff;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    /* Instructions overlay */
+    .instructions {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.95);
+      padding: 24px;
+      border-radius: 12px;
+      max-width: 300px;
+      text-align: center;
+      display: none;
+    }
+    
+    .instructions.active {
+      display: block;
+    }
+    
+    .instructions h3 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #3b82f6;
+    }
+    
+    .instructions p {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    
+    /* Path SVG styles */
+    .target-path {
+      stroke: #000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    
+    .start-marker {
+      fill: #22c55e;
+    }
+    
+    .end-marker {
+      fill: #ef4444;
+    }
+    
+    /* Calibration mode */
+    .calibration {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.8);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">Dental SkillOS</div>
+      <div class="controls">
+        <button class="btn" onclick="toggleSettings()">Settings</button>
+        <button class="btn primary" onclick="toggleTimer()">Start Timer</button>
+      </div>
+    </div>
+    
+    <!-- Settings Panel -->
+    <div class="settings" id="settings">
+      <div class="setting-group">
+        <span class="setting-label">Size</span>
+        <div class="setting-control">
+          <button class="setting-btn" onclick="setSize('small')">1.5cm</button>
+          <button class="setting-btn active" onclick="setSize('standard')">2cm</button>
+          <button class="setting-btn" onclick="setSize('large')">2.6cm</button>
+        </div>
+      </div>
+      
+      <div class="setting-group">
+        <span class="setting-label">Difficulty</span>
+        <div class="setting-control">
+          <button class="setting-btn" onclick="setDifficulty('easy')">Easy</button>
+          <button class="setting-btn active" onclick="setDifficulty('medium')">Med</button>
+          <button class="setting-btn" onclick="setDifficulty('hard')">Hard</button>
+        </div>
+      </div>
+      
+      <div class="setting-group">
+        <span class="setting-label">Pattern</span>
+        <div class="setting-control">
+          <button class="setting-btn active" onclick="setPattern('curve')">Curve</button>
+          <button class="setting-btn" onclick="setPattern('zigzag')">Zig</button>
+          <button class="setting-btn" onclick="setPattern('loop')">Loop</button>
+        </div>
+      </div>
+      
+      <div class="setting-group">
+        <span class="setting-label">Path Width</span>
+        <div class="setting-control">
+          <button class="setting-btn" onclick="setWidth(0.5)">0.5mm</button>
+          <button class="setting-btn active" onclick="setWidth(1)">1mm</button>
+          <button class="setting-btn" onclick="setWidth(2)">2mm</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Display Area -->
+    <div class="display-area">
+      <div class="calibration">
+        2cm × 2cm @ 96 DPI
+      </div>
+      
+      <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶</button>
+      
+      <div class="target-container" id="targetContainer">
+        <svg width="100%" height="100%" viewBox="0 0 100 100" id="targetSvg">
+          <!-- Path will be generated by JS -->
+        </svg>
+      </div>
+      
+      <div class="scale-indicator" id="scaleIndicator">2.0cm × 2.0cm</div>
+      
+      <div class="timer-overlay" id="timer">00:00</div>
+      
+      <div class="instructions active" id="instructions">
+        <h3>Ready to Practice</h3>
+        <p>Position your mirror to view this target indirectly. Keep your eyes on the mirror, not the screen. Trace from green start to red end.</p>
+        <button class="btn primary" onclick="hideInstructions()">Got it</button>
+      </div>
+    </div>
+    
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <div class="status-item">
+        Attempt: <span class="status-value" id="attemptNum">1</span>
+      </div>
+      <div class="status-item">
+        Pattern: <span class="status-value" id="patternName">Curve</span>
+      </div>
+      <div class="status-item">
+        Width: <span class="status-value" id="widthName">1mm</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let currentSize = 'standard';
+    let currentDifficulty = 'medium';
+    let currentPattern = 'curve';
+    let currentWidth = 1;
+    let attemptNumber = 1;
+    let timerInterval = null;
+    let seconds = 0;
+    
+    // Pattern definitions (SVG path data)
+    const patterns = {
+      curve: {
+        easy: 'M 20 50 Q 50 20, 80 50',
+        medium: 'M 20 30 Q 35 30, 35 50 Q 35 70, 50 70 Q 65 70, 65 50 Q 65 30, 80 30',
+        hard: 'M 20 50 Q 35 20, 50 50 Q 65 80, 80 50 Q 65 35, 50 50 Q 35 65, 20 50'
+      },
+      zigzag: {
+        easy: 'M 20 50 L 50 30 L 80 50',
+        medium: 'M 20 70 L 35 30 L 50 70 L 65 30 L 80 70',
+        hard: 'M 20 30 L 30 70 L 40 30 L 50 70 L 60 30 L 70 70 L 80 30'
+      },
+      loop: {
+        easy: 'M 20 50 Q 50 20, 80 50 Q 50 80, 20 50',
+        medium: 'M 30 50 Q 30 30, 50 30 Q 70 30, 70 50 Q 70 70, 50 70 Q 30 70, 30 50',
+        hard: 'M 25 50 Q 25 25, 50 25 Q 75 25, 75 50 Q 75 75, 50 75 Q 25 75, 25 50 M 40 50 Q 50 40, 60 50 Q 50 60, 40 50'
+      }
+    };
+    
+    // Initialize
+    function init() {
+      renderTarget();
+      
+      // Check for attempt number in URL
+      const params = new URLSearchParams(window.location.search);
+      const attempt = params.get('attempt');
+      if (attempt) {
+        attemptNumber = parseInt(attempt);
+        document.getElementById('attemptNum').textContent = attemptNumber;
+      }
+    }
+    
+    // Render target
+    function renderTarget() {
+      const svg = document.getElementById('targetSvg');
+      const pathData = patterns[currentPattern][currentDifficulty];
+      
+      // Calculate stroke width based on target size and desired mm width
+      // 2cm = 75px, so 1mm = 3.75px
+      const strokeWidth = currentWidth * 3.75;
+      
+      svg.innerHTML = `
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10" fill="#000" />
+          </marker>
+        </defs>
+        
+        <!-- Path -->
+        <path class="target-path" 
+              d="${pathData}" 
+              stroke-width="${strokeWidth}"
+              marker-end="url(#arrow)" />
+        
+        <!-- Start marker (green) -->
+        <circle class="start-marker" cx="${getStartX(pathData)}" cy="${getStartY(pathData)}" r="4" />
+        
+        <!-- End marker (red) -->
+        <circle class="end-marker" cx="${getEndX(pathData)}" cy="${getEndY(pathData)}" r="4" />
+      `;
+    }
+    
+    // Helper functions to extract coordinates
+    function getStartX(pathData) {
+      const match = pathData.match(/M\s+([\d.]+)/);
+      return match ? match[1] : 20;
+    }
+    
+    function getStartY(pathData) {
+      const match = pathData.match(/M\s+[\d.]+\s+([\d.]+)/);
+      return match ? match[1] : 50;
+    }
+    
+    function getEndX(pathData) {
+      const matches = pathData.match(/[\d.]+/g);
+      return matches ? matches[matches.length - 2] : 80;
+    }
+    
+    function getEndY(pathData) {
+      const matches = pathData.match(/[\d.]+/g);
+      return matches ? matches[matches.length - 1] : 50;
+    }
+    
+    // Settings controls
+    function toggleSettings() {
+      document.getElementById('settings').classList.toggle('active');
+    }
+    
+    function setSize(size) {
+      currentSize = size;
+      const container = document.getElementById('targetContainer');
+      const indicator = document.getElementById('scaleIndicator');
+      
+      container.classList.remove('small', 'large');
+      
+      if (size === 'small') {
+        container.classList.add('small');
+        indicator.textContent = '1.5cm × 1.5cm';
+      } else if (size === 'large') {
+        container.classList.add('large');
+        indicator.textContent = '2.6cm × 2.6cm';
+      } else {
+        indicator.textContent = '2.0cm × 2.0cm';
+      }
+      
+      updateSettingButtons('Size', size === 'small' ? '1.5cm' : size === 'large' ? '2.6cm' : '2cm');
+    }
+    
+    function setDifficulty(diff) {
+      currentDifficulty = diff;
+      renderTarget();
+      updateSettingButtons('Difficulty', diff === 'easy' ? 'Easy' : diff === 'hard' ? 'Hard' : 'Med');
+      document.getElementById('patternName').textContent = currentPattern.charAt(0).toUpperCase() + currentPattern.slice(1);
+    }
+    
+    function setPattern(pattern) {
+      currentPattern = pattern;
+      renderTarget();
+      updateSettingButtons('Pattern', pattern.charAt(0).toUpperCase() + pattern.slice(1));
+      document.getElementById('patternName').textContent = pattern.charAt(0).toUpperCase() + pattern.slice(1);
+    }
+    
+    function setWidth(width) {
+      currentWidth = width;
+      renderTarget();
+      updateSettingButtons('Width', width + 'mm');
+      document.getElementById('widthName').textContent = width + 'mm';
+    }
+    
+    function updateSettingButtons(group, value) {
+      const buttons = document.querySelectorAll('.setting-btn');
+      buttons.forEach(btn => {
+        if (btn.textContent.toLowerCase().includes(value.toLowerCase()) || 
+            (value === 'Med' && btn.textContent === 'Med')) {
+          btn.classList.add('active');
+        } else if (btn.parentElement.previousElementSibling?.textContent === group) {
+          btn.classList.remove('active');
+        }
+      });
+    }
+    
+    // Timer
+    function toggleTimer() {
+      const timerEl = document.getElementById('timer');
+      
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerEl.classList.remove('active');
+        seconds = 0;
+        timerEl.textContent = '00:00';
+      } else {
+        timerEl.classList.add('active');
+        seconds = 0;
+        timerEl.textContent = '00:00';
+        timerInterval = setInterval(() => {
+          seconds++;
+          const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+          const secs = (seconds % 60).toString().padStart(2, '0');
+          timerEl.textContent = `${mins}:${secs}`;
+        }, 1000);
+      }
+    }
+    
+    // Instructions
+    function hideInstructions() {
+      document.getElementById('instructions').classList.remove('active');
+    }
+    
+    // Fullscreen
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>

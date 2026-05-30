@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dental SkillOS - Quick Reference</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .logo {
+      font-size: 14px;
+      font-weight: 700;
+      color: #3b82f6;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    
+    h1 {
+      font-size: 28px;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    
+    .subtitle {
+      color: #64748b;
+      font-size: 16px;
+    }
+    
+    h2 {
+      font-size: 20px;
+      color: #1e40af;
+      margin: 32px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #dbeafe;
+    }
+    
+    h3 {
+      font-size: 16px;
+      color: #334155;
+      margin: 24px 0 12px;
+    }
+    
+    .highlight-box {
+      background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+      border-left: 4px solid #3b82f6;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    
+    .highlight-box h3 {
+      margin-top: 0;
+      color: #1e40af;
+    }
+    
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    
+    .equipment-item {
+      background: #f1f5f9;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .equipment-item strong {
+      display: block;
+      color: #1e40af;
+      margin-bottom: 4px;
+    }
+    
+    .equipment-item span {
+      font-size: 14px;
+      color: #64748b;
+    }
+    
+    .setup-diagram {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 24px;
+      border-radius: 12px;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+    
+    .metric-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    
+    .metric-table th {
+      background: #1e40af;
+      color: #fff;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+    
+    .metric-table td {
+      padding: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .metric-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+    
+    .checklist {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .checklist h3 {
+      color: #166534;
+      margin-top: 0;
+    }
+    
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed #bbf7d0;
+    }
+    
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+    
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #22c55e;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    
+    .footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 2px solid #e2e8f0;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+    }
+    
+    .difficulty-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    
+    .badge {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .badge.easy { background: #dcfce7; color: #166534; }
+    .badge.medium { background: #dbeafe; color: #1e40af; }
+    .badge.hard { background: #fee2e2; color: #991b1b; }
+    .badge.expert { background: #f3e8ff; color: #7c3aed; }
+    
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .container {
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">Dental SkillOS | MirrorDex v0</div>
+      <h1>Clinical Quick Reference</h1>
+      <p class="subtitle">Smartphone-Based Miniaturized Target Protocol</p>
+    </div>
+    
+    <div class="highlight-box">
+      <h3>🔬 Why Miniaturized Digital Targets?</h3>
+      <p>Clinical dentistry operates at <strong>submillimeter precision</strong> (0.1-0.5mm). Traditional A4 printed targets create a mismatch between training scale and clinical reality. Our 2cm digital targets replicate actual working field size while enabling precise measurement of micro-movements via macro recording.</p>
+    </div>
+    
+    <h2>Equipment Required</h2>
+    
+    <div class="equipment-grid">
+      <div class="equipment-item">
+        <strong>Target Device</strong>
+        <span>Smartphone/tablet with 5"+ screen</span>
+      </div>
+      <div class="equipment-item">
+        <strong>Recording Device</strong>
+        <span>Smartphone with macro mode, 1080p/60fps</span>
+      </div>
+      <div class="equipment-item">
+        <strong>Tripod/Stand</strong>
+        <span>For recording phone (15-20cm height)</span>
+      </div>
+      <div class="equipment-item">
+        <strong>Lighting</strong>
+        <span>Ring light or dual LED sources</span>
+      </div>
+      <div class="equipment-item">
+        <strong>Instruments</strong>
+        <span>Dental mirror (#5) + probe/explorer</span>
+      </div>
+      <div class="equipment-item">
+        <strong>Protection</strong>
+        <span>Tempered glass screen protector</span>
+      </div>
+    </div>
+    
+    <h2>Setup Configuration</h2>
+    
+    <div class="setup-diagram">
+[RECORDING PHONE - Macro Mode @ 60fps]
+         | 15-20cm distance
+         v
++-----------------------------+
+|  [TARGET PHONE/TABLET]      |
+|   Display: digital-target   |
+|   Area: 2cm × 2cm active    |
+|   Brightness: 80-100%       |
++-----------------------------+
+         ^
+         | Direct contact or 1-2mm above
+    [Mirror]----------[Probe]
+    (Non-dominant)   (Dominant)
+    </div>
+    
+    <h2>Target Specifications</h2>
+    
+    <h3>Display Settings</h3>
+    <ul>
+      <li><strong>Active Area:</strong> 2cm × 2cm (scalable: 1.5cm - 2.6cm)</li>
+      <li><strong>Path Width:</strong> 0.5mm - 2mm (difficulty-adjusted)</li>
+      <li><strong>Resolution:</strong> Screen-native (typically 300+ PPI)</li>
+      <li><strong>Contrast:</strong> Black path on white background</li>
+      <li><strong>Markers:</strong> Green start dot, Red end dot</li>
+    </ul>
+    
+    <h3>Difficulty Progression</h3>
+    <div class="difficulty-badges">
+      <span class="badge easy">Beginner: 2mm width</span>
+      <span class="badge medium">Intermediate: 1mm width</span>
+      <span class="badge hard">Advanced: 0.5mm width</span>
+      <span class="badge expert">Expert: 0.3mm width</span>
+    </div>
+    
+    <h2>Recording Protocol</h2>
+    
+    <div class="checklist">
+      <h3>Pre-Recording Checklist</h3>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <span>Target phone brightness at 80-100%</span>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <span>Screen protector clean, no scratches</span>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <span>Recording phone locked at 15-20cm distance</span>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <span>Macro mode enabled, focus locked on target</span>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <span>Lighting balanced (no shadows on screen)</span>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <span>Frame includes entire target + both hands</span>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <span>Attempt number announced at start</span>
+      </div>
+    </div>
+    
+    <h2>What We Measure</h2>
+    
+    <table class="metric-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Description</th>
+          <th>Clinical Relevance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mirror Repositioning</strong></td>
+          <td>Frequency of mirror angle adjustments</td>
+          <td>Visual field stability</td>
+        </tr>
+        <tr>
+          <td><strong>Field Loss Duration</strong></td>
+          <td>Time target not visible in mirror</td>
+          <td>Mirror control competency</td>
+        </tr>
+        <tr>
+          <td><strong>Direct Vision Cheating</strong></td>
+          <td>Instances of looking at target directly</td>
+          <td>Indirect vision discipline</td>
+        </tr>
+        <tr>
+          <td><strong>Path Deviation</strong></td>
+          <td>Distance from ideal path (submm)</td>
+          <td>Precision motor control</td>
+        </tr>
+        <tr>
+          <td><strong>Movement Smoothness</strong></td>
+          <td>Jerk/acceleration patterns</td>
+          <td>Hand stability under load</td>
+        </tr>
+        <tr>
+          <td><strong>Completion Time</strong></td>
+          <td>Task duration with pause detection</td>
+          <td>Efficiency and confidence</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h2>Clinical Applications</h2>
+    
+    <h3>Transferable Skills</h3>
+    <ul>
+      <li><strong>Restorative:</strong> Mirror-guided cavity prep, matrix placement</li>
+      <li><strong>Endodontics:</strong> Canal location under rubber dam</li>
+      <li><strong>Periodontics:</strong> Subgingival scaling visualization</li>
+      <li><strong>Prosthodontics:</strong> Crown prep margin visibility</li>
+      <li><strong>Surgery:</strong> Third molar site visualization</li>
+    </ul>
+    
+    <h2>Workflow Summary</h2>
+    
+    <ol>
+      <li><strong>Assign:</strong> Student receives target via digital-target-display.html</li>
+      <li><strong>Setup:</strong> Position equipment per protocol</li>
+      <li><strong>Practice:</strong> Student traces target using mirror only</li>
+      <li><strong>Record:</strong> Macro video captures entire session</li>
+      <li><strong>Upload:</strong> Video submitted to system</li>
+      <li><strong>Analyze:</strong> AI extracts metrics (2-5 minutes)</li>
+      <li><strong>Review:</strong> Faculty sees video + insights</li>
+      <li><strong>Feedback:</strong> Structured report to student</li>
+    </ol>
+    
+    <div class="highlight-box">
+      <h3>⚠️ Important Notes</h3>
+      <ul>
+        <li>Replace screen protector when scratched (affects tracking accuracy)</li>
+        <li>Calibrate target size if using non-standard screen density</li>
+        <li>Ensure consistent lighting across sessions for valid comparisons</li>
+        <li>Student must maintain indirect vision - direct looking = invalid attempt</li>
+      </ul>
+    </div>
+    
+    <div class="footer">
+      <p><strong>ArchLife / SkillData Lab</strong> • Masters' Union Demo Prototype</p>
+      <p>For questions: Review full CLINICIAN_BRIEF.md</p>
+    </div>
+  </div>
+</body>
+</html>

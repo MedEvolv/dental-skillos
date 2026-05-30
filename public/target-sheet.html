@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dental SkillOS - Target Sheet</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+    
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: white;
+      padding: 20mm;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 15mm;
+    }
+    
+    .header h1 {
+      font-size: 18pt;
+      color: #1e40af;
+      margin-bottom: 5mm;
+    }
+    
+    .header p {
+      font-size: 10pt;
+      color: #64748b;
+    }
+    
+    .target-container {
+      width: 100%;
+      height: 200mm;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      position: relative;
+      background: #fafafa;
+    }
+    
+    /* Start point - green circle */
+    .start-point {
+      position: absolute;
+      width: 20mm;
+      height: 20mm;
+      border: 3mm solid #22c55e;
+      border-radius: 50%;
+      left: 20mm;
+      top: 40mm;
+      background: white;
+    }
+    
+    .start-point::after {
+      content: "START";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8pt;
+      font-weight: bold;
+      color: #22c55e;
+    }
+    
+    /* End point - red circle */
+    .end-point {
+      position: absolute;
+      width: 20mm;
+      height: 20mm;
+      border: 3mm solid #ef4444;
+      border-radius: 50%;
+      right: 20mm;
+      bottom: 40mm;
+      background: white;
+    }
+    
+    .end-point::after {
+      content: "END";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8pt;
+      font-weight: bold;
+      color: #ef4444;
+    }
+    
+    /* Path - black line 3mm width */
+    .path {
+      position: absolute;
+      stroke: #000;
+      stroke-width: 3mm;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    
+    /* Instructions */
+    .instructions {
+      margin-top: 15mm;
+      padding: 10mm;
+      background: #f8fafc;
+      border-radius: 8px;
+      font-size: 10pt;
+      line-height: 1.6;
+      color: #475569;
+    }
+    
+    .instructions h3 {
+      color: #1e40af;
+      margin-bottom: 5mm;
+      font-size: 11pt;
+    }
+    
+    .instructions ul {
+      margin-left: 5mm;
+    }
+    
+    .instructions li {
+      margin-bottom: 2mm;
+    }
+    
+    @media print {
+      body {
+        background: white;
+      }
+      .page {
+        box-shadow: none;
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <h1>Dental SkillOS - Mirror-Guided Target Tracing</h1>
+      <p>Indirect Vision Practice Task</p>
+    </div>
+    
+    <div class="target-container">
+      <!-- SVG Path -->
+      <svg width="100%" height="100%" viewBox="0 0 170 180" preserveAspectRatio="xMidYMid meet">
+        <!-- Winding path from start to end -->
+        <path class="path" d="M 30 60 
+                 Q 50 40, 70 60 
+                 T 110 60 
+                 Q 130 80, 110 100
+                 T 70 100
+                 Q 50 120, 70 140
+                 L 140 140" />
+        
+        <!-- Start marker -->
+        <circle cx="30" cy="60" r="8" fill="white" stroke="#22c55e" stroke-width="3"/>
+        <text x="30" y="64" text-anchor="middle" font-size="5" fill="#22c55e" font-weight="bold">S</text>
+        
+        <!-- End marker -->
+        <circle cx="140" cy="140" r="8" fill="white" stroke="#ef4444" stroke-width="3"/>
+        <text x="140" y="144" text-anchor="middle" font-size="5" fill="#ef4444" font-weight="bold">E</text>
+        
+        <!-- Direction arrows along path -->
+        <polygon points="45,52 50,55 45,58" fill="#000"/>
+        <polygon points="90,57 95,60 90,63" fill="#000"/>
+        <polygon points="120,80 117,85 123,85" fill="#000"/>
+        <polygon points="90,97 95,100 90,103" fill="#000"/>
+        <polygon points="60,130 65,133 60,136" fill="#000"/>
+      </svg>
+    </div>
+    
+    <div class="instructions">
+      <h3>Instructions:</h3>
+      <ul>
+        <li>Position mirror to view the path indirectly</li>
+        <li>Keep eyes on mirror reflection, NOT on the target directly</li>
+        <li>Use probe/stylus to trace the black path from START (green) to END (red)</li>
+        <li>Maintain mirror stability throughout the movement</li>
+        <li>Stay within the path boundaries</li>
+        <li>Complete in one continuous motion if possible</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
