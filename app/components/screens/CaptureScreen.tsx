@@ -260,7 +260,7 @@ export default function CaptureScreen({ onNavigate }: CaptureScreenProps) {
                         </Label>
                         <Select 
                           value={formData.participantId}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, participantId: value }))}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, participantId: value || 'STU-001' }))}
                         >
                           <SelectTrigger>
                             <SelectValue />
@@ -280,7 +280,7 @@ export default function CaptureScreen({ onNavigate }: CaptureScreenProps) {
                         </Label>
                         <Select 
                           value={formData.attemptNumber}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, attemptNumber: value }))}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, attemptNumber: value || '1' }))}
                         >
                           <SelectTrigger>
                             <SelectValue />
