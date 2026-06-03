@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+> **Architectural Note:** Before utilizing Embodied Trace Decoding, read [The Resistance Gap](THE_RESISTANCE_GAP.md). Pure geometry must never replace clinical friction.
+
 ## Getting Started
 
 First, run the development server:
